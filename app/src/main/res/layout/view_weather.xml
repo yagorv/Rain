@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.yago.architectcoders.domain.Weather" />
+
+        <variable
+            name="weather"
+            type="com.yago.architectcoders.domain.Weather" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:padding="2dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.yago.architectcoders.ui.common.AspectRatioImageView
+                android:id="@+id/weather_cover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:ratio="1.5"
+                app:url="@{weather.image}"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="4dp"
+                android:src="@drawable/ic_favorite_on" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/weather_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?attr/colorPrimaryVariant"
+            android:gravity="center"
+            android:lines="2"
+            android:minLines="2"
+            android:padding="8dp"
+            android:text="@{weather.date}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/weather_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?attr/colorPrimaryVariant"
+            android:gravity="center"
+            android:lines="2"
+            android:minLines="2"
+            android:padding="8dp"
+            android:text="@{weather.description}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/weather_wind_direction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?attr/colorPrimaryVariant"
+            android:gravity="center"
+            android:lines="2"
+            android:minLines="2"
+            android:padding="8dp"
+            android:text="@{weather.windDirection}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+            tools:text="@tools:sample/lorem" />
+
+    </LinearLayout>
+</layout>
