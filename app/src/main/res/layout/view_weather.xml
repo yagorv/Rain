@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 app:ratio="1.5"
-                app:url="@{weather.image}"
+                app:imageCode="@{weather.imageCode}"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <ImageView

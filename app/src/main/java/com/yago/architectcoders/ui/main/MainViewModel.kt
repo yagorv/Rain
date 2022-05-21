@@ -1,7 +1,6 @@
 package com.yago.architectcoders.ui.main
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.yago.architectcoders.data.toError
 import com.yago.architectcoders.domain.Error
@@ -41,15 +40,4 @@ class MainViewModel(
         val weathers: List<Weather>? = null,
         val error: Error? = null
     )
-}
-
-@Suppress("UNCHECKED_CAST")
-class MainViewModelFactory(
-    private val getPopularWeathersUseCase: GetPopularWeathersUseCase,
-    private val requestPopularWeathersUseCase: RequestPopularWeathersUseCase
-) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(getPopularWeathersUseCase, requestPopularWeathersUseCase) as T
-    }
 }

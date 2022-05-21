@@ -3,30 +3,14 @@ package com.yago.architectcoders.ui.main
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.yago.architectcoders.R
-import com.yago.architectcoders.data.WeathersRepository
-import com.yago.architectcoders.data.database.WeatherRoomDataSource
-import com.yago.architectcoders.data.server.WeatherServerDataSource
 import com.yago.architectcoders.databinding.FragmentMainBinding
-import com.yago.architectcoders.ui.common.app
 import com.yago.architectcoders.ui.common.launchAndCollect
-import com.yago.architectcoders.usecases.GetPopularWeathersUseCase
-import com.yago.architectcoders.usecases.RequestPopularWeathersUseCase
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val viewModel: MainViewModel by viewModels {
-        val application = requireActivity().app
-        val repository = WeathersRepository(
-            WeatherRoomDataSource(application.db.weatherDao()),
-            WeatherServerDataSource(getString(R.string.api_key))
-        )
-        MainViewModelFactory(
-            GetPopularWeathersUseCase(repository),
-            RequestPopularWeathersUseCase(repository)
-        )
-    }
+    private val viewModel: MainViewModel by viewModel()
 
     private lateinit var mainState: MainState
 
