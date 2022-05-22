@@ -2,14 +2,16 @@ package com.yago.architectcoders
 
 import android.app.Application
 import androidx.room.Room
+import com.yago.architectcoders.data.PlayServicesLocationDataSource
 import com.yago.architectcoders.data.WeathersRepository
 import com.yago.architectcoders.data.database.WeatherDatabase
 import com.yago.architectcoders.data.database.WeatherRoomDataSource
+import com.yago.architectcoders.data.datasource.LocationDataSource
 import com.yago.architectcoders.data.datasource.WeatherLocalDataSource
 import com.yago.architectcoders.data.datasource.WeatherRemoteDataSource
 import com.yago.architectcoders.data.server.WeatherServerDataSource
-import com.yago.architectcoders.ui.detail.DetailViewModel
-import com.yago.architectcoders.ui.main.MainViewModel
+import com.yago.architectcoders.ui.dayForecast.detail.DetailViewModel
+import com.yago.architectcoders.ui.dayForecast.list.MainViewModel
 import com.yago.architectcoders.usecases.GetPopularWeathersUseCase
 import com.yago.architectcoders.usecases.RequestPopularWeathersUseCase
 import org.koin.android.ext.koin.androidContext
@@ -43,13 +45,14 @@ private val appModule = module {
 
     factory<WeatherLocalDataSource> { WeatherRoomDataSource(get()) }
     factory<WeatherRemoteDataSource> { WeatherServerDataSource(get(named("apiKey"))) }
+    factory<LocationDataSource> { PlayServicesLocationDataSource(get()) }
 
     viewModel { MainViewModel(get(), get()) }
     viewModel { (id: Int) -> DetailViewModel(id, get()) }
 }
 
 private val dataModule = module {
-    factory { WeathersRepository(get(), get()) }
+    factory { WeathersRepository(get(), get(), get()) }
 }
 
 private val usesCasesModule = module {

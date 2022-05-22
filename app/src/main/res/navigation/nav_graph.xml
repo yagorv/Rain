@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/main_dest"
-        android:name="com.yago.architectcoders.ui.main.MainFragment"
+        android:name="com.yago.architectcoders.ui.dayForecast.list.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/detail_dest"
-        android:name="com.yago.architectcoders.ui.detail.DetailFragment"
+        android:name="com.yago.architectcoders.ui.dayForecast.detail.DetailDayForecastFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
         <argument

@@ -1,4 +1,4 @@
-package com.yago.architectcoders.ui.detail
+package com.yago.architectcoders.ui.dayForecast.detail
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,7 +7,7 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import com.yago.architectcoders.domain.Weather
 
-class WeatherDetailInfoView @JvmOverloads constructor(
+class DetailDayForecastInfoView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0

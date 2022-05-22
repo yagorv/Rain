@@ -8,9 +8,12 @@ import com.yago.architectcoders.domain.Weather
 
 class WeatherServerDataSource(private val apiKey: String) : WeatherRemoteDataSource {
 
-    override suspend fun findPopularWeather(): Either<Error, List<Weather>> = tryCall {
+    override suspend fun findPopularWeather(
+        latitude: Double,
+        longitude: Double
+    ): Either<Error, List<Weather>> = tryCall {
         RemoteConnection.service
-            .listPopularWeathers(apiKey)
+            .listPopularWeathers(apiKey, latitude, longitude)
             .results
             .toDomainModel()
     }

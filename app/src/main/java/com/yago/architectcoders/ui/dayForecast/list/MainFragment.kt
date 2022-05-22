@@ -1,4 +1,4 @@
-package com.yago.architectcoders.ui.main
+package com.yago.architectcoders.ui.dayForecast.list
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,7 @@ import com.yago.architectcoders.R
 import com.yago.architectcoders.databinding.FragmentMainBinding
 import com.yago.architectcoders.ui.common.launchAndCollect
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 

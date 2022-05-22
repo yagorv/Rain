@@ -2,30 +2,28 @@ package com.yago.architectcoders.data
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.location.Geocoder
 import android.location.Location
-import com.yago.architectcoders.data.datasource.LocationDataSource
 import com.google.android.gms.location.LocationServices
+import com.yago.architectcoders.data.datasource.LocationDataSource
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
 class PlayServicesLocationDataSource(application: Application) : LocationDataSource {
     private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(application)
-    private val geocoder = Geocoder(application)
 
     @SuppressLint("MissingPermission")
-    override suspend fun findLastRegion(): String? =
+    override suspend fun findLastLocation(): Pair<Double, Double>? =
         suspendCancellableCoroutine { continuation ->
             fusedLocationClient.lastLocation
                 .addOnCompleteListener {
-                    continuation.resume(it.result.toRegion())
+                    continuation.resume(it.result.toPair())
                 }
         }
 
-    private fun Location?.toRegion(): String? {
-        val addresses = this?.let {
-            geocoder.getFromLocation(latitude, longitude, 1)
+    private fun Location?.toPair(): Pair<Double, Double>? {
+        val location = this?.let {
+            Pair(it.latitude, it.longitude)
         }
-        return addresses?.firstOrNull()?.countryCode
+        return location
     }
 }

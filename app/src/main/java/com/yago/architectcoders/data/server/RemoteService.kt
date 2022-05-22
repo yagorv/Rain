@@ -8,6 +8,8 @@ interface RemoteService {
     @GET("daily?city=Muros,ES")
     suspend fun listPopularWeathers(
         @Query("key") apiKey: String,
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double,
         @Query("lang") lang: String? = "es"
     ): RemoteResult
 

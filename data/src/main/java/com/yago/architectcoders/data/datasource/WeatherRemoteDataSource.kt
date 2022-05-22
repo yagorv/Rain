@@ -5,5 +5,8 @@ import com.yago.architectcoders.domain.Error
 import com.yago.architectcoders.domain.Weather
 
 interface WeatherRemoteDataSource {
-    suspend fun findPopularWeather(): Either<Error, List<Weather>>
+    suspend fun findPopularWeather(
+        latitude: Double,
+        longitude: Double
+    ): Either<Error, List<Weather>>
 }

@@ -1,4 +1,4 @@
-package com.yago.architectcoders.ui.main
+package com.yago.architectcoders.ui.dayForecast.list
 
 import android.Manifest
 import android.content.Context
