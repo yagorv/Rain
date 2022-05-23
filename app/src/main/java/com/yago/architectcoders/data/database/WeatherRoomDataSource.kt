@@ -4,6 +4,7 @@ import com.yago.architectcoders.data.datasource.WeatherLocalDataSource
 import com.yago.architectcoders.data.tryCall
 import com.yago.architectcoders.domain.Error
 import com.yago.architectcoders.domain.Weather
+import com.yago.architectcoders.domain.WeatherCode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -30,7 +31,7 @@ private fun List<DbWeather>.toDomainModel(): List<Weather> =
 private fun DbWeather.toDomainModel(): Weather =
     Weather(
         -1,
-        imageCode,
+        WeatherCode.valueOf(weatherCode),
         date,
         description,
         windDirection,
@@ -65,7 +66,7 @@ private fun List<Weather>.fromDomainModel(): List<DbWeather> = map { it.fromDoma
 
 private fun Weather.fromDomainModel(): DbWeather = DbWeather(
     id = null,
-    imageCode,
+    WeatherCode.valueOf(weatherCode),
     date,
     description,
     windDirection,

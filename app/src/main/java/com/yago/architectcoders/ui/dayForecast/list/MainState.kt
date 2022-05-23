@@ -30,7 +30,7 @@ class MainState(
     private val locationPermissionRequester: PermissionRequester
 ) {
     fun onWeatherClicked(weather: Weather) {
-        val action = MainFragmentDirections.actionMainToDetail(weather.id)
+        val action = ListDayForecastFragmentDirections.actionMainToDetail(weather.id)
         navController.navigate(action)
     }
 
@@ -46,5 +46,4 @@ class MainState(
         is Error.Server -> context.getString(R.string.server_error) + error.code
         is Error.Unknown -> context.getString(R.string.unknown_error) + error.message
     }
-
 }

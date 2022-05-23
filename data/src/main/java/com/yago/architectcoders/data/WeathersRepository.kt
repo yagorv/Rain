@@ -12,20 +12,22 @@ class WeathersRepository(
     private val localDataSource: WeatherLocalDataSource,
     private val remoteDataSource: WeatherRemoteDataSource
 ) {
-    val popularWeathers = localDataSource.weathers
+    val forecastWeathers = localDataSource.weathers
 
     fun findById(id: Int): Flow<Weather> = localDataSource.findById(id)
 
     suspend fun requestPopularWeathers(): Error? {
         if (localDataSource.isEmpty()) {
             val location = locationDataSource.findLastLocation()
-            val latitude = location?.first ?: 0.00
-            val longitude = location?.second ?: 0.00
-            val weathers = remoteDataSource.findPopularWeather(latitude, longitude)
-            weathers.fold(ifLeft = {
-                return it
-            }) {
-                localDataSource.save(it)
+            val latitude = location?.first
+            val longitude = location?.second
+            if (latitude != null && longitude != null) {
+                val weathers = remoteDataSource.getForecastWeathers(latitude, longitude)
+                weathers.fold(ifLeft = {
+                    return it
+                }) {
+                    localDataSource.save(it)
+                }
             }
         }
         return null

@@ -10,8 +10,8 @@ import com.yago.architectcoders.domain.Weather
 import com.yago.architectcoders.ui.common.basicDiffUtil
 import com.yago.architectcoders.ui.common.inflate
 
-class WeathersAdapter(private val listener: (Weather) -> Unit) :
-    ListAdapter<Weather, WeathersAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
+class ListDayForecastsAdapter(private val listener: (Weather) -> Unit) :
+    ListAdapter<Weather, ListDayForecastsAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.view_weather, false)
@@ -20,8 +20,10 @@ class WeathersAdapter(private val listener: (Weather) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val weather = getItem(position)
-        holder.bind(weather)
-        holder.itemView.setOnClickListener { listener(weather) }
+        holder.apply {
+            bind(weather)
+            itemView.setOnClickListener { listener(weather) }
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

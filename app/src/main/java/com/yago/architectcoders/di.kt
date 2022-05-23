@@ -9,11 +9,13 @@ import com.yago.architectcoders.data.database.WeatherRoomDataSource
 import com.yago.architectcoders.data.datasource.LocationDataSource
 import com.yago.architectcoders.data.datasource.WeatherLocalDataSource
 import com.yago.architectcoders.data.datasource.WeatherRemoteDataSource
+import com.yago.architectcoders.data.server.RemoteConnection
 import com.yago.architectcoders.data.server.WeatherServerDataSource
 import com.yago.architectcoders.ui.dayForecast.detail.DetailViewModel
-import com.yago.architectcoders.ui.dayForecast.list.MainViewModel
-import com.yago.architectcoders.usecases.GetPopularWeathersUseCase
-import com.yago.architectcoders.usecases.RequestPopularWeathersUseCase
+import com.yago.architectcoders.ui.dayForecast.list.ListDayForecastViewModel
+import com.yago.architectcoders.usecases.FindWeatherUseCase
+import com.yago.architectcoders.usecases.GetSavedForecastWeathersUseCase
+import com.yago.architectcoders.usecases.RequestForecastWeathersUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -44,10 +46,11 @@ private val appModule = module {
     single { get<WeatherDatabase>().weatherDao() }
 
     factory<WeatherLocalDataSource> { WeatherRoomDataSource(get()) }
-    factory<WeatherRemoteDataSource> { WeatherServerDataSource(get(named("apiKey"))) }
+    factory<WeatherRemoteDataSource> { WeatherServerDataSource(get(named("apiKey")), get()) }
     factory<LocationDataSource> { PlayServicesLocationDataSource(get()) }
+    single { RemoteConnection(get()).service }
 
-    viewModel { MainViewModel(get(), get()) }
+    viewModel { ListDayForecastViewModel(get(), get()) }
     viewModel { (id: Int) -> DetailViewModel(id, get()) }
 }
 
@@ -56,6 +59,7 @@ private val dataModule = module {
 }
 
 private val usesCasesModule = module {
-    factory { GetPopularWeathersUseCase(get()) }
-    factory { RequestPopularWeathersUseCase(get()) }
+    factory { GetSavedForecastWeathersUseCase(get()) }
+    factory { RequestForecastWeathersUseCase(get()) }
+    factory { FindWeatherUseCase(get()) }
 }

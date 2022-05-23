@@ -5,14 +5,16 @@ import com.yago.architectcoders.data.datasource.WeatherRemoteDataSource
 import com.yago.architectcoders.data.tryCall
 import com.yago.architectcoders.domain.Error
 import com.yago.architectcoders.domain.Weather
+import com.yago.architectcoders.domain.WeatherCode
 
-class WeatherServerDataSource(private val apiKey: String) : WeatherRemoteDataSource {
+class WeatherServerDataSource(private val apiKey: String, private val service: RemoteService) :
+    WeatherRemoteDataSource {
 
-    override suspend fun findPopularWeather(
+    override suspend fun getForecastWeathers(
         latitude: Double,
         longitude: Double
     ): Either<Error, List<Weather>> = tryCall {
-        RemoteConnection.service
+        service
             .listPopularWeathers(apiKey, latitude, longitude)
             .results
             .toDomainModel()
@@ -24,33 +26,33 @@ private fun List<RemoteWeather>.toDomainModel(): List<Weather> = map { it.toDoma
 private fun RemoteWeather.toDomainModel(): Weather =
     Weather(
         -1,
-        weather?.code ?: -1,
-        datetime ?: "nulo?",
-        weather?.description ?: "descrip?",
-        windDirection ?: "dirre1ç",
-        clouds ?: -13,
-        moonrise ?: -13,
-        sunrise ?: -13,
-        averageHumidity ?: -13,
-        averagePressure ?: .13,
-        minTemp ?: .13,
-        maxTemp ?: .13,
-        temp ?: .13,
-        sunSet ?: -13,
-        moonSet ?: -13,
-        ozone ?: .13,
-        windGustSpeed ?: -.13,
-        snowDepth ?: -13,
-        feelsMinTemp ?: -.13,
-        feelsMaxTemp ?: -.13,
-        windSpeed ?: -.13,
-        precipitationPercentage ?: -13,
-        seaLevePressure ?: -.13,
-        visibilityKms ?: -.13,
-        snow ?: -13,
-        uv ?: -.13,
-        precipitation ?: -.13,
-        cloudsLow ?: -13,
-        cloudsMid ?: -13,
-        cloudsHi ?: -13
+        WeatherCode.valueOf(weather?.code ?: -1),
+        datetime ?: "",
+        weather?.description ?: "",
+        windDirection ?: "",
+        clouds ?: -1,
+        moonrise ?: -1,
+        sunrise ?: -1,
+        averageHumidity ?: -1,
+        averagePressure ?: -.1,
+        minTemp ?: -.1,
+        maxTemp ?: -.1,
+        temp ?: -.1,
+        sunSet ?: -1,
+        moonSet ?: -1,
+        ozone ?: -.1,
+        windGustSpeed ?: -.1,
+        snowDepth ?: -1,
+        feelsMinTemp ?: -.1,
+        feelsMaxTemp ?: -.1,
+        windSpeed ?: -.1,
+        precipitationPercentage ?: -1,
+        seaLevePressure ?: -.1,
+        visibilityKms ?: -.1,
+        snow ?: -1,
+        uv ?: -.1,
+        precipitation ?: -.1,
+        cloudsLow ?: -1,
+        cloudsMid ?: -1,
+        cloudsHi ?: -1
     )

@@ -1,5 +1,8 @@
 package com.yago.architectcoders.data.server
 
+import android.app.Application
+import com.yago.architectcoders.App
+import com.yago.architectcoders.R
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -9,9 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-object RemoteConnection {
-
-    private const val BASE_URL = "https://api.weatherbit.io/v2.0/forecast/"
+class RemoteConnection(app: Application) {
 
     private val okHttpClient = HttpLoggingInterceptor().run {
         level = HttpLoggingInterceptor.Level.BODY
@@ -19,7 +20,7 @@ object RemoteConnection {
     }
 
     private val builder = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(app.getString(R.string.base_url))
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

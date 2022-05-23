@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class DbWeather(
     @PrimaryKey(autoGenerate = true) val id: Int?,
-    val imageCode: Int,
+    val weatherCode: Int,
     val date: String,
     val description: String,
     val windDirection: String,

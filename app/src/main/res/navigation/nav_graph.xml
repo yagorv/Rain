@@ -21,9 +21,9 @@
 
     <fragment
         android:id="@+id/main_dest"
-        android:name="com.yago.architectcoders.ui.dayForecast.list.MainFragment"
+        android:name="com.yago.architectcoders.ui.dayForecast.list.ListDayForecastFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main">
+        tools:layout="@layout/fragment_forecast_list">
         <action
             android:id="@+id/action_main_to_detail"
             app:destination="@id/detail_dest"
@@ -36,7 +36,7 @@
         android:id="@+id/detail_dest"
         android:name="com.yago.architectcoders.ui.dayForecast.detail.DetailDayForecastFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail">
+        tools:layout="@layout/fragment_forecast_detail">
         <argument
             android:name="weatherId"
             app:argType="integer" />

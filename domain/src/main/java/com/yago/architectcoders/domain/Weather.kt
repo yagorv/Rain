@@ -2,7 +2,7 @@ package com.yago.architectcoders.domain
 
 data class Weather(
     val id: Int,
-    val imageCode: Int,
+    val weatherCode: WeatherCode,
     val date: String,
     val description: String,
     val windDirection: String,

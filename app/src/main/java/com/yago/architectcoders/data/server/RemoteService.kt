@@ -5,7 +5,7 @@ import retrofit2.http.Query
 
 interface RemoteService {
 
-    @GET("daily?city=Muros,ES")
+    @GET("forecast/daily")
     suspend fun listPopularWeathers(
         @Query("key") apiKey: String,
         @Query("lat") latitude: Double,
