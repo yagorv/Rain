@@ -30,7 +30,7 @@ private fun List<DbWeather>.toDomainModel(): List<Weather> =
 
 private fun DbWeather.toDomainModel(): Weather =
     Weather(
-        -1,
+        id ?: -1,
         WeatherCode.valueOf(weatherCode),
         date,
         description,

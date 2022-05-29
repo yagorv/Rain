@@ -1,8 +1,10 @@
 package com.yago.architectcoders.ui.dayForecast.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.yago.architectcoders.R
 import com.yago.architectcoders.databinding.FragmentForecastListBinding
 import com.yago.architectcoders.ui.common.launchAndCollect
@@ -24,6 +26,22 @@ class ListDayForecastFragment : Fragment(R.layout.fragment_forecast_list) {
 
         val binding = FragmentForecastListBinding.bind(view).apply {
             recycler.adapter = adapter
+        }
+
+        binding.apply {
+            toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+            toolbar.setOnClickListener {
+                Log.d(
+                    ListDayForecastFragment::class.java.name,
+                    "setOnClickListener"
+                )
+            }
+        }
+
+        viewLifecycleOwner.launchAndCollect(viewModel.countryName) {
+            binding.apply {
+                toolbar.title = it
+            }
         }
 
         viewLifecycleOwner.launchAndCollect(viewModel.state) {

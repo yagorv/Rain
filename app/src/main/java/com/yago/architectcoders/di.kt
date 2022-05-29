@@ -45,12 +45,13 @@ private val appModule = module {
 
     single { get<WeatherDatabase>().weatherDao() }
 
+    factory { PlayServicesLocationDataSource(get()) }
     factory<WeatherLocalDataSource> { WeatherRoomDataSource(get()) }
     factory<WeatherRemoteDataSource> { WeatherServerDataSource(get(named("apiKey")), get()) }
     factory<LocationDataSource> { PlayServicesLocationDataSource(get()) }
     single { RemoteConnection(get()).service }
 
-    viewModel { ListDayForecastViewModel(get(), get()) }
+    viewModel { ListDayForecastViewModel(get(), get(), get()) }
     viewModel { (id: Int) -> DetailViewModel(id, get()) }
 }
 

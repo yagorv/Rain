@@ -24,8 +24,8 @@ class DetailDayForecastFragment : Fragment(R.layout.fragment_forecast_detail) {
         val binding = FragmentForecastDetailBinding.bind(view)
 
         binding.apply {
-            weatherDetailToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-            weatherDetailFavorite.setOnClickListener {
+            toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+            toolbar.setOnClickListener {
                 Log.d(
                     DetailDayForecastFragment::class.java.name,
                     "setOnClickListener"
