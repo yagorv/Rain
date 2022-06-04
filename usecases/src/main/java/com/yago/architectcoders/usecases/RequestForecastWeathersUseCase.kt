@@ -6,6 +6,6 @@ import com.yago.architectcoders.data.WeathersRepository
 class RequestForecastWeathersUseCase(private val weathersRepository: WeathersRepository) {
 
     suspend operator fun invoke(): Error? {
-        return weathersRepository.requestPopularWeathers()
+        return weathersRepository.requestForecastWeather()
     }
 }
